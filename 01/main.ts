@@ -111,8 +111,24 @@ function calculateFuel(mass: number): number {
     }
 }
 
+function calculateTotalFuel(mass: number): number {
+    let totalFuel = 0
+
+    do {
+        const fuel = calculateFuel(mass)
+        if (fuel === 0) {
+            break
+        }
+
+        totalFuel += fuel
+        mass = fuel
+    } while (true)
+
+    return totalFuel
+}
+
 function calculate(input: Array<number>): number {
-    return input.map(calculateFuel).reduce((a, b) => a + b)
+    return input.map(calculateTotalFuel).reduce((a, b) => a + b)
 }
 
 console.log(calculate(input))
