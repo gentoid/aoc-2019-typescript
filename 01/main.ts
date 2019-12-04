@@ -101,12 +101,12 @@ let input = [
     137493,
 ];
 
-function calculateOneModule(mass: number): number {
+function calculateFuel(mass: number): number {
     return Math.floor(mass / 3) - 2;
 }
 
 function calculate(input: Array<number>): number {
-    return input.reduce((a, b) => a + b)
+    return input.map(calculateFuel).reduce((a, b) => a + b)
 }
 
 calculate(input)
