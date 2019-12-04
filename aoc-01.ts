@@ -1,4 +1,4 @@
-let input = [
+let input01 = [
     81157,
     80969,
     113477,
@@ -131,4 +131,4 @@ function calculate(input: Array<number>): number {
     return input.map(calculateTotalFuel).reduce((a, b) => a + b)
 }
 
-console.log(calculate(input))
+console.log(calculate(input01))
