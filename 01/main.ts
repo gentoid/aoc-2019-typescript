@@ -102,7 +102,13 @@ let input = [
 ];
 
 function calculateFuel(mass: number): number {
-    return Math.floor(mass / 3) - 2;
+    const fuel = Math.floor(mass / 3) - 2;
+    if (fuel < 0) {
+        return 0
+    }
+    else {
+        return fuel
+    }
 }
 
 function calculate(input: Array<number>): number {
