@@ -110,5 +110,3 @@ function calculate(input: Array<number>): number {
 }
 
 calculate(input)
-// 9916056
-// 4957804
