@@ -6,7 +6,11 @@ interface Program {
     halted: boolean
 }
 
-let program: Program = { memory: input02, address: 0, halted: false }
+let init = (): Program => ({
+    memory: Object.assign([], input02),
+    address: 0,
+    halted: false,
+})
 
 let tick = (program: Program): void => {
     if (program.halted) { return }
@@ -27,9 +31,11 @@ let tick = (program: Program): void => {
     program.address += 4
 }
 
-let run = (program: Program): number => {
-    program.memory[1] = 12
-    program.memory[2] = 2
+let run = (noun: number, verb: number): number => {
+    let program = init()
+
+    program.memory[1] = noun
+    program.memory[2] = verb
 
     while (!program.halted) {
         tick(program)
@@ -38,4 +44,21 @@ let run = (program: Program): number => {
     return program.memory[0]
 }
 
-console.log(run(program))
+let aoc_02_01 = (): number => run(12, 2)
+
+let aoc_02_02 = (): number => {
+    const lookingFor = 19690720;
+
+    for (const noun of [...Array(100).keys()]) {
+        for (const verb of [...Array(100).keys()]) {
+            if (run(noun, verb) == lookingFor) {
+                return 100 * noun + verb
+            }
+        }
+    }
+
+    return 0
+}
+
+console.log(aoc_02_01())
+console.log(aoc_02_02())
