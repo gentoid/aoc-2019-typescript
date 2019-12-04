@@ -109,4 +109,4 @@ function calculate(input: Array<number>): number {
     return input.map(calculateFuel).reduce((a, b) => a + b)
 }
 
-calculate(input)
+console.log(calculate(input))
