@@ -46,4 +46,4 @@ class Computer implements ComputerState {
     }
 }
 
-console.log((new Computer(input02)).run())
+console.log((new Computer(input02)).run()[0])
