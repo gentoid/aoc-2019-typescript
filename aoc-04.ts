@@ -6,12 +6,10 @@ const initDigits = (): Tuple6 => [0, 0, 0, 0, 0, 0]
 
 class BruteForce {
     current: Tuple6 = initDigits()
-    till: Tuple6 = initDigits()
     possiblePasswords: Array<number> = []
     leftToCheck: number = 0
 
     constructor(from: number, till: number) {
-        this.till = this.toDigits(till)
         this.current = this.toDigits(from)
         this.leftToCheck = till - from
     }
