@@ -106,6 +106,8 @@ const manhattanDistance = (point1: Point, point2: Point): number => {
 }
 const manhattanDistanceFromStart = (point: Point) => manhattanDistance(startPoint, point)
 
+const segmentLength = (segm: Segment): number => manhattanDistance(segm.p1, segm.p2)
+
 const aoc_03_01 = () => {
     const segments0 = toSegments(parseLine(input03[0]))
     const segments1 = toSegments(parseLine(input03[1]))
@@ -124,4 +126,31 @@ const aoc_03_01 = () => {
     return Math.min(...intersections.map(manhattanDistanceFromStart))
 }
 
+const aoc_03_02 = (): number => {
+    const segments0 = toSegments(parseLine(input03[0]))
+    const segments1 = toSegments(parseLine(input03[1]))
+
+    let lengths: Array<number> = []
+
+    let segm0Length = 0;
+    for (const segm0 of segments0) {
+        let segm1Length = 0;
+        for (const segm1 of segments1) {
+            const intersect = intersection(segm0, segm1)
+            if (intersect) {
+                const sumLengh = segm0Length
+                    + segm1Length
+                    + manhattanDistance(segm0.p1, intersect)
+                    + manhattanDistance(segm1.p1, intersect)
+                lengths.push(sumLengh)
+            }
+            segm1Length += segmentLength(segm1)
+        }
+        segm0Length += segmentLength(segm0)
+    }
+
+    return Math.min(...lengths)
+}
+
 console.log(aoc_03_01())
+console.log(aoc_03_02())
