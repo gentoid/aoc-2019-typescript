@@ -55,7 +55,7 @@ class BruteBorce {
 
         for (let index in [...Array(length - 1)]) {
             const revIndex = length - parseInt(index, 10)
-            if (this.current[revIndex] >= 9) {
+            if (this.current[revIndex] > 9) {
                 this.current[revIndex] = 0
                 this.current[revIndex - 1] += 1
             }
