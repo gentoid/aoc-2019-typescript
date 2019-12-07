@@ -16,7 +16,7 @@ class BruteBorce {
         this.leftToCheck = till - from
     }
 
-    run(): Array<number> {
+    run(): number {
         while (this.leftToCheck >= 0) {
             if (this.valid()) {
                 this.possiblePasswords.push(this.toNumber())
@@ -24,7 +24,7 @@ class BruteBorce {
             this.next()
         }
 
-        return this.possiblePasswords
+        return this.possiblePasswords.length
     }
 
     toDigits(num: number): Tuple6 {
