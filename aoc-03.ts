@@ -24,6 +24,8 @@ interface Segment {
     direction: Direction,
 }
 
+const startPoint = { x: 0, y: 0 }
+
 let parseLine = (line: string): Array<Diff> => {
     return line.split(",").map(move => {
         move = move.trim()
@@ -63,7 +65,7 @@ const newSegment = (point: Point, diff: Diff): Segment => {
 }
 
 const toSegments = (diffs: Array<Diff>): Array<Segment> => {
-    let point: Point = { x: 0, y: 0 }
+    let point: Point = startPoint
     let segments: Array<Segment> = []
 
     for (const diff of diffs) {
@@ -99,9 +101,10 @@ const intersection = (segm1: Segment, segm2: Segment): Point | null => {
     return intersectOneWay(segm1, segm2) || intersectOneWay(segm2, segm1)
 }
 
-const manhattanDistance = (point: Point): number => {
-    return Math.abs(point.x) + Math.abs(point.y)
+const manhattanDistance = (point1: Point, point2: Point): number => {
+    return Math.abs(point2.x - point1.x) + Math.abs(point2.y - point1.y)
 }
+const manhattanDistanceFromStart = (point: Point) => manhattanDistance(startPoint, point)
 
 const aoc_03_01 = () => {
     const segments0 = toSegments(parseLine(input03[0]))
@@ -118,8 +121,7 @@ const aoc_03_01 = () => {
         }
     }
 
-    return Math.min(...intersections.map(manhattanDistance))
-
+    return Math.min(...intersections.map(manhattanDistanceFromStart))
 }
 
 console.log(aoc_03_01())
