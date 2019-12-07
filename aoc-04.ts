@@ -4,7 +4,7 @@ type Tuple6 = [number, number, number, number, number, number]
 
 const initDigits = (): Tuple6 => [0, 0, 0, 0, 0, 0]
 
-class BruteBorce {
+class BruteForce {
     current: Tuple6 = initDigits()
     till: Tuple6 = initDigits()
     possiblePasswords: Array<number> = []
@@ -87,4 +87,4 @@ class BruteBorce {
     }
 }
 
-console.log(new BruteBorce(input04[0], input04[1]).run())
+console.log(new BruteForce(input04[0], input04[1]).run())
