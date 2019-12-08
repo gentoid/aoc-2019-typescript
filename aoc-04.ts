@@ -14,9 +14,20 @@ class BruteForce {
         this.leftToCheck = till - from
     }
 
-    run(): number {
+    run01(): number {
         while (this.leftToCheck >= 0) {
-            if (this.valid()) {
+            if (this.valid01()) {
+                this.possiblePasswords.push(this.toNumber())
+            }
+            this.next()
+        }
+
+        return this.possiblePasswords.length
+    }
+
+    run02(): number {
+        while (this.leftToCheck >= 0) {
+            if (this.valid02()) {
                 this.possiblePasswords.push(this.toNumber())
             }
             this.next()
@@ -62,8 +73,12 @@ class BruteForce {
         this.leftToCheck -= 1
     }
 
-    valid(): boolean {
+    valid01(): boolean {
         return this.digitsNotDecrease() && this.hasTwoAdjacentDigits()
+    }
+
+    valid02(): boolean {
+        return this.digitsNotDecrease() && this.hasOnlyTwoAdjacentDigits()
     }
 
     digitsNotDecrease(): boolean {
@@ -83,6 +98,25 @@ class BruteForce {
         }
         return false
     }
+
+    hasOnlyTwoAdjacentDigits(): boolean {
+        const min = 0
+        const max = this.current.length - 2
+
+        for (let index in [...Array(max + 1)]) {
+            const i = parseInt(index, 10)
+            const num = this.current[i]
+
+            if ((i === min || this.current[i - 1] !== num)
+                && num === this.current[i + 1]
+                && (i === max || this.current[i + 2] !== num)) {
+                return true
+            }
+        }
+
+        return false
+    }
 }
 
-console.log(new BruteForce(input04[0], input04[1]).run())
+console.log(new BruteForce(input04[0], input04[1]).run01())
+console.log(new BruteForce(input04[0], input04[1]).run02())
